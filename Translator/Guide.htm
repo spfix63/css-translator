@@ -1,0 +1,108 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1257"></head>
+
+<h1 align=center>TMET2114 Trečias praktinis darbas</h1>
+
+<h3 align=center>Kursas: Transliavimo metodai, 2012/13 m.m. rudens sem.</h3>
+
+<TABLE cellPadding="4" border="1">
+<TR><TD><B><I>Variantas</I></B>:</TD><TD>316</TD></TR>
+<TR><TD><B><I>Atliko</I></B>:</TD><TD>Jonas Inčius</TD></TR>
+<TR><TD><B><I>Pradėtas</I></B>:</TD><TD>2012-11-18</TD></TR>
+<TR><TD><B><I>Baigtas</I></B>:</TD><TD>2012-11-25</TD></TR>
+<TR><TD><B><I>Sugaišta</I></B>:</TD><TD>25 h</TD></TR>
+</TABLE>
+
+<h3>Uždavinio formulavimo analizė:</h3>
+
+<p><strong>Užduotis:</strong></p>
+<p>
+Transliatoriaus rašymas. Nagrinėjama kalba: Cascading Style Sheets su pridėtom aritmetinėm išraiškom. 
+Transliuojam į: C++.
+</p>
+
+<h3>Atlikto darbo palyginimas su ankstesniu šio darbo atlikimu</h3>
+<p>
+Ankstesnis darbo atlikimas nebuvo pateiktas.
+</p>
+
+<h3>Vartotojo vadovas:</h3>
+<h4>Paleidimas:</h4>
+<p>
+Programą paruošti gnu make įrankiu. 
+Programos paleidimo komanda atrodo šitaip:
+"[programos_vardas] [įvesties_failo_vardas] [klasių_apibrėžimų_išvesties_failo_vardas] [klasių_implementacijų_išvesties_failo_vardas]".
+Kabučių ir [] nerašyti. Pvz: ./uzd3 Sample38.trm CppOutput.h CppOutput.cpp.
+Jeigu programos darbas nepavyksta, išvedamas koks nors klaidos pranešimas. Jeigu pavyksta, pranešama apie sėkmingą darbo pabaigą.
+</p>
+<h4>Transliatoriaus aprašymas:</h4>
+<p>
+Transliuoja pavyzdinę kalbą į C++. Pavyzdinė kalba savo forma primena CSS, t.y. 
+selektorius parenka elementus, kuriem galioja bloko viduje aprašyti priskyrimai.
+Selektoriai gali būti įvairūs. Šį savybė suteikia transliatoriui sudėtingumo.
+C++ išvestis susideda iš Tėvinės elemento klasės, kuri turi virtualų metodą applyCss,
+bei jos klasių-vaikų, kurie generuojami analizuojant CSS įvestį. Atpažinus naują 
+elementą, jam sukuriama klasė ir aprašomas paveldėtas metodas applyCss, kurio viduje
+atliekami priskyrimai buvę CSS bloko viduje. Klasių, id, pseudo ir atributų selektoriai
+įgyvendinami naudojantys if sakiniais, lyginant atitinkamą elemento lauką su duotąja
+reikšme. Ir tik tais atvejais, kai jos sutampa, įvyksta minėti priskyrimai. Atributai
+naudojami CSS priskyrimuose C++ išreiškiami nariais kintamaisiais, kurie taip pat 
+generuojami nagrinėjant įvesties failą. Sutransliuotos klasės turės lygiai tiek
+skirtingų narių kintamųjų, kiek jų elementam atributų būvo panaudota Css taisyklėse. 
+Taisyklės, kurios nenurodo konkretaus elemento, pritaikomos visiem elementam. Jos
+kaupiamos iki vykdymo pabaigos, ir sutransliuojamos paskutinės. Tai sukelia šalutinį
+efektą, dėl kurio tokios taisyklės turi didžiausią prioritetą.
+</p>
+<p>
+Pastabos: transliatorius pasirūpina, kad viena elementų turėtų tik vieną ją atitinkančią
+klasę ir, kad vienoje klasėje nesikartotų kintamųjų vardai.
+</p>
+
+
+<h3>Programuotojo vadovas:</h3>
+<h4>Apibendrinimas:</h4>
+<p>
+Transliuoja pavyzdinę kalbą į C++. Pavyzdinė kalba savo forma primena CSS, t.y. 
+selektorius parenka elementus, kuriem galioja bloko viduje aprašyti priskyrimai.
+Programa susideda iš lex generuoto skanerio, yacc generuoto parserio ir C kalba
+aprašyto C++ kodo generatoriaus. Yacc parseriui papildyti yra parašyti selektoriaus,
+bloko ir atributo moduliai. Parseriui atpažįstant duomenys, šios struktūros yra jais
+užpildomos ir perduodamos į kodo generatorių. Kodo generatorius susideda iš klasės, 
+metodo ir kintamojo generavimo modulių. Gali generuoti C++ klasių aprašus ir 
+implementacijas. Palaiko iki vienos tėvinės klasės. Skiria private, protected 
+ir public dalis. Supranta metodo savoką. Metodui galima parinkti tipą, ir 
+argumentų sąrašą. Supranta kintamojo sąvoką. Galima kurti kintamuosius suteikiant 
+jiem duomenų tipą ir pavadinimą. Klasės apraše gali būti metodai ir kintamieji. 
+Pagal klasės aprašą sugeneruoja implementaciją. Taip pat generuoja metodų 
+implementacijas ir leidžia į juos pridėti papildomo kodo.
+</p>
+
+<h4>Tolesnis plėtimas:</h4>
+<p>
+Tolesnį plėtimą reikėtų pradėti svarstymais apie naudojamos kalbos keitimą. Programa veikia
+su pavyzdiniu kalbos failu, tačiau visas funkcionalumos neištestuotas. Be to, autoriaus tvarkymasis
+su C stiliaus eilutėmis, nenaudojant papildomų modulių atminties tvarkymui, paliko galybę vietos 
+atminties nutekėjimams ir sunkiai atsekamoms segmentation fault klaidom. Perėjimas prie kitos kalbos 
+leistų perrašyti esamą kodą priemonėmis, kurios galbūt yra atsparesnės panašaus pobūdžio klaidoms.
+Tai galimai leistų panaikinti panašaus tipo tiksinčias laiko bombas. Koks bebūtų sprendimas, yra
+nemažai kitų vietų, kurioms reikia skirti dėmesį. Esamas C++ generatorius yra platesnis, negu 
+reikalauja užduotis, tačiau visvien smarkiai neišbaigtas. Jam reikėtų geresnio metodų generavimo,
+static, ir pure virtual palaikymo. Geresniam metodų generavimui reikėtų konstrukcijų aprašančių
+if sakinius ir for ciklus. Taip pat konstrukcijos aprašančios priskyrimą ir kitų metodų kvietimus.
+Galima būtų pridėti konstruktorių ir destruktorių generavimą. Pradžiai to turėtų užtekti.
+Reikėtų patobulinti kalbos aprašymą ir jos interpretaciją. Galima būtų palaikyti daugiau tikrojo
+CSS funkcionalumo. Analizavimo dalyje reikėtų įgyvendinti elementų paveldėjimo tikrinimą.
+Pasiekus šiuos dalykus, galima būtų ieškoti ar kurti naršyklę, kuriai šitoks funkcionalumas būtų
+tinkamas.
+</p>
+<p>
+Pastabos pletėjui: Visa funkcijom perduodama atmintis yra kopijuojama. Ir visos iš funkcijų grąžinamos 
+atminties atlaisvinimas yra kvietėjo atsakomybė. Taip pat, nemaža dalis tų kopijų nėra reikalingos 
+ir dažnai nėra pagrįstos. Reikėtų pagerinti atminties valdymą programoje.
+</p>
+
+</body>
+
+</html>

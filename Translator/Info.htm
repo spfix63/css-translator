@@ -1,0 +1,144 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1257"></head>
+
+<h1 align=center>TMET2114 Ketvirtas praktinis darbas</h1>
+
+<h3 align=center>Kursas: Transliavimo metodai, 2012/13 m.m. rudens sem.</h3>
+
+<TABLE cellPadding="4" border="1">
+<TR><TD><B><I>Atliko</I></B>:</TD><TD>Jonas Inčius</TD></TR>
+<TR><TD><B><I>Pradėtas</I></B>:</TD><TD>2012-12-06</TD></TR>
+<TR><TD><B><I>Baigtas</I></B>:</TD><TD>2012-12-08</TD></TR>
+<TR><TD><B><I>Sugaišta</I></B>:</TD><TD>16 h</TD></TR>
+</TABLE>
+
+<h3>Uždavinio formulavimas:</h3>
+
+<p><strong>Užduotis:</strong></p>
+<p>
+Trečioje užduotyje parašyto transliatoriaus patobulinimas. Aritmetinių išraiškų apdorojimo perkėlimas į mano kodą, iš yacc.
+Išraiškos rezultato gavimo išvedimas pažingsniui. Nagrinėjama kalba: Cascading Style Sheets su pridėtom aritmetinėm išraiškom. 
+Transliuojam į: C++.
+</p>
+
+<p><strong>Įgyvendinimas:</strong></p>
+<p>
+Parašiau modulį, kuris kaip įvestį gauna leksemas, kurias paverčia į aritmetinę išraišką ir suskaičiuoja jos reiškmę.
+Išvestyje gaunamas suskaičiuotas išraiškos rezultatas ir visas išvedimo sąrašas C++ komentaro pavidalu. Komentaras pasižymi tuo,
+kad tarpinės išraiškos atspindį gylį, kuriame suskaičiuota reikšmė, ar tai sumos ar sandaugos reikšmė, bei kelinta suma ar sandauga tai buvo
+atitinkamame gylyje. Modulis naudoja stekinį būsenų grafą.
+Veikia įteruodamas per leksemų sąrašą, jas analizuoja ir atitinkamai apdoroja, bei atnaujina būsena. Pakeliui generuojamas išvedimo kodas.
+</p>
+
+<p>Išraiška Expr:(22 + 23) * ((12 + 3) * 17) * (10 + (21 * 17)) * 7 + 10 * 17 sutransliuojama į: </p>
+<pre>
+/*
+Original expression: (22 + 23) * ((12 + 3) * 17) * (10 + (21 * 17)) * 7 + 10 * 17
+L2_ADD1 = 22 + 23
+L3_ADD1 = 12 + 3
+L2_MUL1 = L3_ADD1 * 17
+L1_MUL1 = L2_ADD1 * L2_MUL1
+L3_MUL1 = 21 * 17
+L2_ADD2 = 10 + L3_MUL1
+L1_MUL2 = L1_MUL1 * L2_ADD2
+L1_MUL3 = L1_MUL2 * 7
+L1_MUL4 = 10 * 17
+L1_ADD1 = L1_MUL3 + L1_MUL4
+*/
+Expr = "29479445";
+</pre>
+
+<p><strong>Pokyčiai lyginant su trečiu praktiniu darbu:</strong></p>
+<ul>
+<li>Parašytas naujas modulis skirtas aritmetinių išraiškų apdorojimui ArithmeticTranslator.</li>
+<li>yacc.y išmestas aritmetinių išraiškų apdorojimas (perkeltas į ArithmeticTranslator)</li>
+<li>Ištaisyta keletas klaidų trukdančių transliatoriaus veikimui</li>
+<li>Daug smulkių pokyčių įvairiuose failuose, kurie buvo reikalingi naujo modulio integravimui</li>
+</ul>
+
+<h3>Darbo rezultatai:</h3>
+<dl>
+    <dt><a href="Makefile">Makefile</a></dt>
+    <dd>Make failas, programos paruošimui.</dd>
+
+    <dt><a href="lex.lex">lex.lex</a></dt>
+    <dd>Leksinio analizatoriaus aprašymas lex.</dd>
+    
+    <dt><a href="yacc.y">yacc.y</a></dt>
+    <dd>Sintaksinio analizatoriaus aprašymas yacc.</dd>
+	  
+    <dt><a href="uzd4.sh">uzd4.sh</a></dt>
+    <dd>Paleidimo failas OS UNIX.</dd>
+	  
+    <dt><a href="uzd4.bat">uzd4.bat</a></dt>
+    <dd>Paleidimo failas MS DOS.</dd>
+	
+    <dt><a href="ArithmeticTranslator.h">ArithmeticTranslator.h</a></dt>
+    <dd>Modulis skirtas aritmetinių išraiškų apdorojimui.</dd>
+    
+    <dt><a href="ArithmeticTranslator.c">ArithmeticTranslator.c</a></dt>
+    <dd>Modulis skirtas aritmetinių išraiškų apdorojimui.</dd>
+    
+    <dt><a href="Attribute.h">Attribute.h</a></dt>
+    <dd>Modulis skirtas CSS atributo aprašymui.</dd>
+    
+    <dt><a href="Attribute.c">Attribute.c</a></dt>
+    <dd>Modulis skirtas CSS atributo aprašymui.</dd>
+	
+    <dt><a href="CppClass.h">CppClass.h</a></dt>
+    <dd>Modulis skirtas C++ klasės aprašymui.</dd>
+    
+    <dt><a href="CppClass.c">CppClass.c</a></dt>
+    <dd>Modulis skirtas C++ klasės aprašymui.</dd>
+	
+    <dt><a href="CodeGen.h">CodeGen.h</a></dt>
+    <dd>Pagrindinis kodo generavimo koordinacijos modulis.</dd>
+    
+    <dt><a href="CodeGen.c">CodeGen.c</a></dt>
+    <dd>Pagrindinis kodo generavimo koordinacijos modulis.</dd>
+	
+    <dt><a href="main.c">main.c</a></dt>
+    <dd>Programos paleidimo taškas.</dd>
+	
+    <dt><a href="MethodDeclaration.h">MethodDeclaration.h</a></dt>
+    <dd>Modulis skirtas C++ metodo deklaracijos	aprašymui.</dd>
+    
+    <dt><a href="MethodDeclaration.c">MethodDeclaration.c</a></dt>
+    <dd>Modulis skirtas C++ metodo deklaracijos aprašymui.</dd>
+	
+    <dt><a href="MethodImplementation.h">MethodImplementation.h</a></dt>
+    <dd>Modulis skirtas C++ metodo implementacijos aprašymui.</dd>
+    
+    <dt><a href="MethodImplementation.c">MethodImplementation.c</a></dt>
+    <dd>Modulis skirtas C++ metodo implementacijos aprašymui.</dd>
+	
+    <dt><a href="Node.h">Node.h</a></dt>
+    <dd>Modulis skirtas CSS bloko aprašymui.</dd>
+    
+    <dt><a href="Node.c">Node.c</a></dt>
+    <dd>Modulis skirtas CSS bloko aprašymui.</dd>
+	
+    <dt><a href="Selector.h">Selector.h</a></dt>
+    <dd>Modulis skirtas CSS selektoriaus aprašymui.</dd>
+    
+    <dt><a href="Selector.c">Selector.c</a></dt>
+    <dd>Modulis skirtas CSS selektoriaus aprašymui.</dd>
+	
+    <dt><a href="VariableDeclaration.h">VariableDeclaration.h</a></dt>
+    <dd>Modulis skirtas C++ kintamojo aprašymui.</dd>
+    
+    <dt><a href="VariableDeclaration.c">VariableDeclaration.c</a></dt>
+    <dd>Modulis skirtas C++ kintamojo aprašymui.</dd>
+	
+    <dt><a href="vector.h">vector.h</a></dt>
+    <dd>Paprasta vektoriaus implementacija, kuria naudojausi programoje.</dd>
+    
+    <dt><a href="vector.c">vector.c</a></dt>
+    <dd>Paprasta vektoriaus implementacija, kuria naudojausi programoje.</dd>
+</dl>
+
+</body>
+
+</html>
